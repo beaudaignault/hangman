@@ -1,0 +1,74 @@
+
+main {
+  display: flex;
+  display: -ms-flexbox; 
+	display: -webkit-flex;
+	flex-flow: column nowrap;
+  min-height: 100%;
+  
+}
+.b-parts {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+.parts b {font-size: 4em;}
+section b {
+  display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+  width: 100%;
+  font-size: 4em;
+  color: gray;
+}
+#legs:last-child {
+transform: rotate(-25deg);
+border: none;
+}
+#legs:nth-child(2){
+  transform: rotate(25deg);
+}
+form {
+  margin-bottom: 20%;
+  flex-wrap: wrap;
+}
+.kr1, .kr2, .kr3 {
+  display: flex;
+  display: -ms-flexbox; 
+	display: -webkit-flex;
+	flex-flow: row;
+  max-width: 50%;
+}
+.kr1 p, .kr2 p, .kr3 p {
+  font-family: Courier New, Courier, monospace;
+  font-weight: 700;
+  font-size:1.2em;
+  border: 2px dashed #C2c2c2;
+  border-radius:8px; 
+  padding: 1em;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+
+}
+.kr1 p:hover, .kr2 p:hover, .kr3 p:hover, button:hover {
+background-color: rgba(255, 192, 204, 0.479);
+}
+.kr2 {
+  max-width: 70%;
+  letter-spacing: 6px;
+  margin: o auto;
+  margin-left: 4.2%;
+}
+
+button {
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 1.2em;
+  margin-right: 2%;
+}
+ 

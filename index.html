@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hang Man</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<h1>hang man</h1>
+<main class="parts">
+  <div id="head" class="b-parts">
+    <b data-item="1">O</b> <!-- head -->
+  </div>
+  <div id="torso" class="b-parts">
+    <b data-item="2">/</b> <!-- arm1 -->
+    <b data-item="3">||</b> <!-- torso -->
+    <b data-item="4">\</b> <!-- arm2 -->
+  </div>
+  <div id="legs" class="b-parts">
+    <b data-item="5">)</b> <!-- leg1 -->
+    <b data-item="6">(</b> <!-- leg2 -->
+  </div>
+</main>
+
+<section>
+  <b id="success-attempt">__ __ __ __ __ </b>
+</section>
+
+  <div class="keyboard">
+    <div class="kr1">
+    <p>q</p>
+    <p>w</p>
+    <p>e</p>
+    <p>r</p>
+    <p>t</p>
+    <p>y</p>
+    <p>u</p>
+    <p>i</p>
+    <p>o</p>
+    <p>p</p>
+   </div>
+   <div class="kr2">
+     <p>a</p>
+     <p>s</p>
+     <p>d</p>
+     <p>f</p>
+     <p>g</p>
+     <p>h</p>
+     <p>j</p>
+     <p>k</p>
+     <p>l</p>
+   </div>
+   <div class="kr3">
+     <p>z</p>
+     <p>x</p>
+     <p>c</p>
+     <p>v</p>
+     <p>b</p>
+     <p>n</p>
+     <p>m</p>
+   </div>
+ 
+  <footer>
+   
+      <button>Next Word</button>
+  </footer>
+</div> 
+<script src="js/main.js"></script>  
+</body>
+</html>
