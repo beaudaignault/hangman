@@ -6,15 +6,35 @@ var secret, guess, numWrong;
 /*----- event listeners -----*/
 /*----- functions -----*/
 
-function rotateArray(){
-  var keys = Object.keys( ArrOfarr );
+var wordsArray = [
+  "Apples",
+  "Bananas",
+  "Pears"
+];
 
-  var name = keys[ Math.floor(Math.random()*keys.length) ];
+var random = Math.floor(Math.random() * wordsArray.length)
+var randomWord = wordsArray[random];
 
-  var item = ArrOfarr[ name ];
+console.log(randomWord+ " boo")
+ 
+//document.body.innerHTML = randomItem;
+ 
+//click on data-char item in page saves data-char in string, and checks against randomWord characters
+$('#keyboard p').click(function(evt) {
+	var charMap = $(this).attr('data-char')
+	console.log(this)
+});
 
-  console.log( name );
-  console.log( item );
-}
 //secret = words[ Math.floor(Math.random()*words.length)];
 //guess = // set to a string of same length as secret, but with placeholders //
+
+
+function render() {
+	renderScore();
+	renderBoard();
+	if (winner) {
+		renderWinner();
+	} else {
+		renderTurn();
+	}
+}
