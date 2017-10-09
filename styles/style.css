@@ -1,4 +1,17 @@
-
+.wrap {
+  margin: 0 auto;
+  /* background: pink; */
+  width: 79%;
+}
+h1 {
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 10%;
+  left: 4%;
+  font-size: 3em;
+  text-align: right;
+  color: rgb(134, 9, 9);
+}
 main {
   display: flex;
   display: -ms-flexbox; 
@@ -17,6 +30,21 @@ main {
   color: rgba(220, 220, 220, 0.22);
 }
 .parts b {font-size: 4em;}
+
+#legs:last-child {
+/* transform: rotate(-25deg); */
+border: none;
+}
+#legs:nth-child(2){
+  /* transform: rotate(25deg); */
+}
+ form {/* remove TBD */
+  margin-bottom: 20%;
+  flex-wrap: wrap;
+}
+
+/* Secret word: */
+
 section ul {
   display: -ms-flexbox;
 	display: -webkit-flex;
@@ -25,16 +53,14 @@ section ul {
   font-size: 4em;
   color: gray;
 }
-#legs:last-child {
-/* transform: rotate(-25deg); */
-border: none;
+li[class^="reveal"]+b {
+  position: relative;
+  left: 0;
 }
-#legs:nth-child(2){
-  /* transform: rotate(25deg); */
-}
-form {
-  margin-bottom: 20%;
-  flex-wrap: wrap;
+
+.keyboard {
+max-width: 89%;
+margin: 0 auto;
 }
 .kr1, .kr2, .kr3 {
   display: flex;
@@ -42,6 +68,7 @@ form {
 	display: -webkit-flex;
 	flex-flow: row;
   max-width: 50%;
+  letter-spacing: 6px;
 }
 .kr1 p, .kr2 p, .kr3 p {
   font-family: Courier New, Courier, monospace;
@@ -55,14 +82,12 @@ form {
   align-items: center;
   justify-content: center;
   line-height: normal;
-
 }
 .kr1 p:hover, .kr2 p:hover, .kr3 p:hover, button:hover {
-background-color: rgba(255, 192, 204, 0.479);
+background-color: rgba(135, 219, 132, 0.479);
 }
 .kr2 {
-  max-width: 70%;
-  letter-spacing: 6px;
+  /* max-width: 70%; */
   margin: o auto;
   margin-left: 4.2%;
 }
@@ -90,6 +115,6 @@ li.conceal {
   left: -999999px; 
 }
 .reveal {
-  /* position: relative;
-  left: 0; */
+  position: relative;
+  left: 0;
 }
