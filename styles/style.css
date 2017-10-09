@@ -15,7 +15,7 @@ main {
   border: 1px solid black;
 }
 .parts b {font-size: 4em;}
-section b {
+section ul {
   display: -ms-flexbox;
 	display: -webkit-flex;
 	display: flex;
@@ -71,14 +71,19 @@ button {
   font-size: 1.2em;
   margin-right: 2%;
 }
-.secretword p b {
+.secretword ul li {
   display: inline;
-  letter-spacing: 4px;
+  letter-spacing: .15em;
+  margin: 0 .25em;
+  text-align: center;
+  padding-left: 2%;
+  border-bottom: 3px solid gray;
+  width: 50px;
 }
 .conceal {
   /* position: relative;
   left: 999999px; */
-  text-decoration: underline;
+  background-color: gray;
 }
 .reveal {
   /* position: relative;
