@@ -63,8 +63,7 @@ function handleClick(evt) {
   onWin();
   renderButton();
   removeHangMan();
-  // inform("Wow! &cetera!"
-  // );
+
 } // end HandelClick
 /*----- functions -----*/
 
@@ -101,6 +100,8 @@ function nextWord() {
   // renderHangMan();
   resetKeys()
   renderHangMan()
+  removeHangMan();
+  
   // get rid of the underlines
   $('.secretword > ul').html("");
   // reset the hangman character
