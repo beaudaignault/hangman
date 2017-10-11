@@ -139,3 +139,6 @@ b[class^="reveal"] {
 p[class^="fail"] {
   background-color: rgba(150, 83, 91, 0.479);
 }
+.clear {
+  background-color: #fff;
+}

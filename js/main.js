@@ -43,10 +43,12 @@ function handleClick(evt) {
     console.log(numWrong + ' num wrong')
     onLose();
     numWrong++
+    
     inform('try again!');
   }
   onWin();
-}
+  
+} // end HandelClick
 
 /*----- functions -----*/
 // $(document).ready(function () {
@@ -60,6 +62,37 @@ function randomFromArray() {
 }
 randomFromArray();
 
+function nextWord() {
+  // RESET things 
+
+  // get rid of the underlines
+  $('.secretword > ul').html("");
+
+  // reset the hangman character
+
+
+  // reset the touch keys
+  function resetKeys() {
+    var resetks = document.getElementsByTagName("p");
+    for (var i = 0, length = resetks.length; i < length; i++) {
+      // wrongGuess.forEach(function (item, idx) {
+        $('p').attr({
+          'class': 'clear'
+        });
+      // });
+    }
+  }
+  resetKeys()
+  // end RESET
+
+  // generate a new secret
+  randomFromArray();
+
+  // put underlines on the DOM for each letter in secret
+  manageHiddenWord();
+}
+document.getElementById('nextword').addEventListener('click', nextWord);
+
 function manageHiddenWord() {
   for (var i = 0; i < secret.length; i++) {
     $('.secretword > ul').append('<li class="conceal" data-idx="' + (this.secret[i]) + '"><b>' + (this.secret[i]) + '</b></li>');
@@ -69,11 +102,6 @@ function manageHiddenWord() {
     var touchKey = touchKeys[i];
     touchKey.addEventListener('click', handleClick);
   }; // for touchKey end
-  // if (secret.includes.$(p).getAttribute('data-idx')){
-  //   $('p[data-char^="' + (guess[i]) + '"]').attr({
-  //     'class': 'success'
-  //   })
-  // }
 }
 manageHiddenWord();
 
@@ -85,39 +113,10 @@ function revealChar() {
     $('p[data-char^="' + (wrongGuess[i]) + '"]').attr({
       'class': 'fail'
     })
-    // if (secret.includes(this.getAttribute('data-char').toString())) {
-    //   secret.forEach(function (kp, index) {
-    //     console.log(kp, index)
-    //     $('p[data-char^="' + (index) + '"]').attr({
-    //       'class': 'success'
-    //     });
-    //   });
-    // }
   }
 }
 
-function onLose() {
-  $('.b-parts').each(function () {
-    var min = 20,
-      max = -50,
-      min2 = -40,
-      max2 = 40,
-      random = Math.floor(Math.random() * (max - min + 1)) + min,
-      random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2,
-      css = "top:" + random + "px; left:" + random2 + "px",
-      el = $(this);
-    el.on({
-      mouseenter: function () {
-        el.attr("style", css);
-      },
-      mouseleave: function () {
-        setTimeout(function () {
-          el.removeAttr("style");
-        }, 300);
-      }
-    });
-  });
-}
+function onLose() {}
 
 function inform(message) {
   $("#dialog .dialog-msg").html(message);
