@@ -18,7 +18,11 @@ main {
 	display: -webkit-flex;
 	flex-flow: column nowrap;
   min-height: 100%;
+  width: 55%;
   
+}
+canvas {
+  border: 2px solid gray;
 }
 .b-parts {
   display: flex;
@@ -117,4 +121,21 @@ li.conceal {
 .reveal {
   position: relative;
   left: 0;
+}
+b.reveal {
+  color: rgb(134, 9, 9);
+transition: 2000;  
+}
+b[class^="reveal"] {
+  position: relative;
+  left: 0;
+  color: rgb(134, 9, 9); 
+}
+.b-parts {
+  position: relative;
+  transition: 0.3s .1s;
+  top:0; left:0;
+}
+p[class^="fail"] {
+  background-color: rgba(150, 83, 91, 0.479);
 }

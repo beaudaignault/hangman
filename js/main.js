@@ -4,18 +4,49 @@
 var secret = [],
   secretIdx = [],
   guess = [],
-  rightGuess = [],
+  wrongGuess = [],
   numWrong = 0,
   guessIdx, clickCount = 0
+
 /*----- cached element references -----*/
-alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; // may delete TBD
 var wordsArray = [
-  "apples",
-  "bananas",
-  "pears",
+  "apple",
+  "banana",
+  "pear",
   "broom"
 ];
+// var $p = $(p);
 /*----- event listeners -----*/
+function handleClick(evt) {
+  this.removeEventListener('click', handleClick)
+
+  if (!secret.includes(this.getAttribute('data-char').toString())) {
+    wrongGuess.push(this.getAttribute('data-char'));
+    wrongGuess.forEach(function (item, idx) {
+      console.log(item, idx)
+      $('b[data-item^="' + (idx) + '"]').attr({
+        'class': 'reveal'
+      });
+    });
+  }
+  // *this* refers to the p tag that's been clicked, I think ;)
+  guess.push(this.getAttribute('data-char'));
+  // check char in guess against secret
+  if (guess !== null) { // don't really know what to do here
+    guess.forEach(function (item, idx) {
+      revealChar();
+    });
+  }
+  if (numWrong === 6) {
+    this.removeEventListener('click', handleClick)
+    numWrong++;
+    console.log(numWrong + ' num wrong')
+    onLose();
+    numWrong++
+    inform('try again!');
+  }
+  onWin();
+}
 
 /*----- functions -----*/
 // $(document).ready(function () {
@@ -25,44 +56,85 @@ function randomFromArray() {
   var randomToString = wordsArray[random];
   console.log(randomToString);
   secret = randomToString.split("");
-  console.log(secret + ' foo');
+  // console.log(secret + ' foo');
 }
 randomFromArray();
-manageHiddenWord();
+
 function manageHiddenWord() {
   for (var i = 0; i < secret.length; i++) {
     $('.secretword > ul').append('<li class="conceal" data-idx="' + (this.secret[i]) + '"><b>' + (this.secret[i]) + '</b></li>');
   }
-var touchKeys = document.getElementsByTagName("p");
-for (var i = 0, length = touchKeys.length; i < length; i++) {
-  var touchKey = touchKeys[i];
-  touchKey.addEventListener('click', (function (evt) {
-        // *this* refers to the p tag that's been clicked
-        // need to keep adding to guess while numWrong < 6
-    guess.push(this.getAttribute('data-char'));
-         // check char in guess against secret 
-   if ( guess !== null ) { // don't really know what to do here
-      guess.forEach(function(item){
-        console.log(item + " fooly");
-      revealHiddenChar();
-      });
-    } else { 
-      console.log(secret + " no match");
-      numWrong++;
-    }
-    console.log(this.getAttribute('data-char') + " (is data attribute)");
-  }), true);
-};
+  var touchKeys = document.getElementsByTagName("p");
+  for (var i = 0, length = touchKeys.length; i < length; i++) {
+    var touchKey = touchKeys[i];
+    touchKey.addEventListener('click', handleClick);
+  }; // for touchKey end
+  // if (secret.includes.$(p).getAttribute('data-idx')){
+  //   $('p[data-char^="' + (guess[i]) + '"]').attr({
+  //     'class': 'success'
+  //   })
+  // }
 }
-      function revealHiddenChar() {
-        for (var i = 0; i < guess.length; i++) { 
-          $('li[data-idx^="' + (guess[i]) + '"]').attr({
-            'class': 'reveal'
-          })
+manageHiddenWord();
+
+function revealChar() {
+  for (var i = 0; i < guess.length; i++) {
+    $('li[data-idx^="' + (guess[i]) + '"]').attr({
+      'class': 'reveal'
+    });
+    $('p[data-char^="' + (wrongGuess[i]) + '"]').attr({
+      'class': 'fail'
+    })
+    // if (secret.includes(this.getAttribute('data-char').toString())) {
+    //   secret.forEach(function (kp, index) {
+    //     console.log(kp, index)
+    //     $('p[data-char^="' + (index) + '"]').attr({
+    //       'class': 'success'
+    //     });
+    //   });
+    // }
+  }
+}
+
+function onLose() {
+  $('.b-parts').each(function () {
+    var min = 20,
+      max = -50,
+      min2 = -40,
+      max2 = 40,
+      random = Math.floor(Math.random() * (max - min + 1)) + min,
+      random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2,
+      css = "top:" + random + "px; left:" + random2 + "px",
+      el = $(this);
+    el.on({
+      mouseenter: function () {
+        el.attr("style", css);
+      },
+      mouseleave: function () {
+        setTimeout(function () {
+          el.removeAttr("style");
+        }, 300);
       }
+    });
+  });
+}
+
+function inform(message) {
+  $("#dialog .dialog-msg").html(message);
+  $("#dialog").dialog("open");
+};
+
+function onWin() {
+  var counter = 0;
+  for (var i = 0; i < $('li').length; i++) {
+    if ($('li')[i].getAttribute('class') === 'reveal') {
+      counter += 1;
     }
-
-
+  }
+  if (counter === secret.length) {
+    console.log('end of game');
+  }
+}
 
 //click on data-char item in page saves data-char in string, and checks against randomWord characters
 // if character is in randomWord, create innerHTML element containing the character

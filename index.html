@@ -13,19 +13,23 @@
   <div class="wrap">
 <h1>hang man</h1>
 <main class="parts">
-  <div id="head" class="b-parts">
-    <b data-item="1">O</b> <!-- head -->
+ <!-- <canvas id="figure" width="620" height="520"></canvas> -->
+ <div id="head" class="b-parts">
+    <b data-item="0">Q</b> 
   </div>
   <div id="torso" class="b-parts">
-    <b data-item="2">/</b> <!-- arm1 -->
-    <b data-item="3">||</b> <!-- torso -->
-    <b data-item="4">\</b> <!-- arm2 -->
+    <b data-item="1">/</b> 
+    <b data-item="2">||</b> 
+    <b data-item="3">\</b> 
   </div>
   <div id="legs" class="b-parts">
-    <b data-item="5">)</b> <!-- leg1 -->
-    <b data-item="6">(</b> <!-- leg2 -->
+    <b data-item="4">)</b> 
+    <b data-item="5">(</b> 
   </div>
 </main>
+<aside id="dialog">
+  <p class="dialog-msg"></p>
+</aside>
 
 <section class="secretword">
   <ul id="success-attempt"></ul>
