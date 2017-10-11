@@ -17,7 +17,7 @@ var wordsArray = [
 ];
 // var $p = $(p);
 /*----- event listeners -----*/
-function handleClick(evt) {
+function handleClick(evt) { 
   this.removeEventListener('click', handleClick)
 
   if (!secret.includes(this.getAttribute('data-char').toString())) {
@@ -37,7 +37,7 @@ function handleClick(evt) {
       revealChar();
     });
   }
-  if (numWrong === 6) {
+  if (numWrong === 6) { // no idea what I've done here (below) <-
     this.removeEventListener('click', handleClick)
     numWrong++;
     console.log(numWrong + ' num wrong')
@@ -47,9 +47,26 @@ function handleClick(evt) {
     inform('try again!');
   }
   onWin();
+  renderButton();
   
 } // end HandelClick
+function renderButton() {
+  $('#keyboard p').each(function() {
+    var currentLetter = $(this).attr('data-char')
+    // determins whether currentLetter is in wrongGuesses
+    if (!wrongGuess.includes(currentLetter)) {
+      $(this).attr({
+        'class': ''
+      })
+    }else {
+      $(this).attr({
+        'class': 'fail'
+      })
+    }
+  })
 
+
+}
 /*----- functions -----*/
 // $(document).ready(function () {
 // choose random word from wordsArray, hold it in randomWord
@@ -64,7 +81,8 @@ randomFromArray();
 
 function nextWord() {
   // RESET things 
-
+  wrongGuess = []
+  resetKeys()
   // get rid of the underlines
   $('.secretword > ul').html("");
 
@@ -77,12 +95,12 @@ function nextWord() {
     for (var i = 0, length = resetks.length; i < length; i++) {
       // wrongGuess.forEach(function (item, idx) {
         $('p').attr({
-          'class': 'clear'
+          'class': 'clear' //to-do: RESET doesn't clear this style. Sad :(
         });
       // });
     }
   }
-  resetKeys()
+
   // end RESET
 
   // generate a new secret
@@ -110,13 +128,11 @@ function revealChar() {
     $('li[data-idx^="' + (guess[i]) + '"]').attr({
       'class': 'reveal'
     });
-    $('p[data-char^="' + (wrongGuess[i]) + '"]').attr({
-      'class': 'fail'
-    })
+    
   }
 }
 
-function onLose() {}
+// function onLose() {}
 
 function inform(message) {
   $("#dialog .dialog-msg").html(message);
