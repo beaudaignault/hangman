@@ -15,20 +15,34 @@ var wordsArray = [
   "pear",
   "broom"
 ];
-// var $p = $(p);
-/*----- event listeners -----*/
-function handleClick(evt) { 
-  this.removeEventListener('click', handleClick)
 
-  if (!secret.includes(this.getAttribute('data-char').toString())) {
-    wrongGuess.push(this.getAttribute('data-char'));
+function removeHangMan() {
+  if (guess.length === secret.length) {
     wrongGuess.forEach(function (item, idx) {
       console.log(item, idx)
       $('b[data-item^="' + (idx) + '"]').attr({
-        'class': 'reveal'
+        'class': ''
       });
     });
   }
+}
+/*----- event listeners -----*/
+function renderHangMan() {
+  wrongGuess.forEach(function (item, idx) {
+    console.log(item, idx)
+    $('b[data-item^="' + (idx) + '"]').attr({
+      'class': 'reveal'
+    });
+  });
+}
+
+function handleClick(evt) {
+  this.removeEventListener('click', handleClick)
+  if (!secret.includes(this.getAttribute('data-char').toString())) {
+    wrongGuess.push(this.getAttribute('data-char'));
+  }
+  renderHangMan();
+ 
   // *this* refers to the p tag that's been clicked, I think ;)
   guess.push(this.getAttribute('data-char'));
   // check char in guess against secret
@@ -43,31 +57,33 @@ function handleClick(evt) {
     console.log(numWrong + ' num wrong')
     onLose();
     numWrong++
-    
+
     inform('try again!');
   }
   onWin();
   renderButton();
-  
+  removeHangMan();
+  // inform("Wow! &cetera!"
+  // );
 } // end HandelClick
+/*----- functions -----*/
+
 function renderButton() {
-  $('#keyboard p').each(function() {
+  $('#keyboard p').each(function () {
     var currentLetter = $(this).attr('data-char')
     // determins whether currentLetter is in wrongGuesses
     if (!wrongGuess.includes(currentLetter)) {
       $(this).attr({
         'class': ''
       })
-    }else {
+    } else {
       $(this).attr({
         'class': 'fail'
       })
     }
-  })
-
-
+  });
 }
-/*----- functions -----*/
+
 // $(document).ready(function () {
 // choose random word from wordsArray, hold it in randomWord
 function randomFromArray() {
@@ -82,22 +98,19 @@ randomFromArray();
 function nextWord() {
   // RESET things 
   wrongGuess = []
+  // renderHangMan();
   resetKeys()
+  renderHangMan()
   // get rid of the underlines
   $('.secretword > ul').html("");
-
   // reset the hangman character
-
-
   // reset the touch keys
   function resetKeys() {
     var resetks = document.getElementsByTagName("p");
     for (var i = 0, length = resetks.length; i < length; i++) {
-      // wrongGuess.forEach(function (item, idx) {
-        $('p').attr({
-          'class': 'clear' //to-do: RESET doesn't clear this style. Sad :(
-        });
-      // });
+      $('p').attr({
+        'class': 'clear' //to-do: RESET doesn't clear this style. Sad :(
+      });
     }
   }
 
@@ -120,6 +133,7 @@ function manageHiddenWord() {
     var touchKey = touchKeys[i];
     touchKey.addEventListener('click', handleClick);
   }; // for touchKey end
+  renderHangMan()
 }
 manageHiddenWord();
 
@@ -128,7 +142,6 @@ function revealChar() {
     $('li[data-idx^="' + (guess[i]) + '"]').attr({
       'class': 'reveal'
     });
-    
   }
 }
 
