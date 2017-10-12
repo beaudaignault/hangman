@@ -7,6 +7,9 @@
   <title>Hang Man</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+  <script src="jquery-ui/external/jquery/jquery.js"></script>
+  <script src="jquery-ui/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
@@ -14,22 +17,26 @@
 <h1>hang man</h1>
 <main class="parts">
  <!-- <canvas id="figure" width="620" height="520"></canvas> -->
- <div id="head" class="b-parts">
-    <b data-item="0">Q</b> 
+ <div id="head" class="b-parts" value="completed : false">
+    
+    <b data-item="0" class="el">Q</b> 
+    
   </div>
-  <div id="torso" class="b-parts">
-    <b data-item="1">/</b> 
-    <b data-item="2">||</b> 
-    <b data-item="3">\</b> 
+  <div id="torso" class="b-parts" value="completed : false">
+    <b data-item="1" class="el">/</b> 
+    <b data-item="2" class="el">||</b> 
+    <b data-item="3" class="el">\</b> 
   </div>
-  <div id="legs" class="b-parts">
-    <b data-item="4">)</b> 
-    <b data-item="5">(</b> 
+  <div id="legs" class="b-parts" value="completed : false">
+    <b data-item="4" class="el">)</b> 
+    <b data-item="5" class="el">(</b> 
   </div>
+  <aside id="dialog" class="hidden">
+    <p class="dialog-msg"></p>
+    <button class="try-again">Try again</button>
+  </aside>
 </main>
-<aside id="dialog">
-  <p class="dialog-msg"></p>
-</aside>
+
 
 <section class="secretword">
   <ul id="success-attempt"></ul>

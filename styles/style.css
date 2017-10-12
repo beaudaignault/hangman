@@ -131,14 +131,44 @@ b[class^="reveal"] {
   left: 0;
   color: rgb(134, 9, 9); 
 }
-.b-parts {
-  position: relative;
-  transition: 0.3s .1s;
-  top:0; left:0;
-}
+
 p[class^="fail"] {
   background-color: rgba(150, 83, 91, 0.479);
 }
 .clear {
   background-color: #fff;
+}
+.b-parts b{
+  position: relative;
+  font-weight: 700;
+  font-size: 3.5em;
+}
+.b-parts b .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+.b-parts b .letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+#dialog {
+  position: relative;
+  top: 50%;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+#dialog .dialog-msg {
+  outline: 2px solid red;
+  background-color: pink;
+}
+.hidden {
+  display: none;
+}
+.show {
+  display: inline-block;
 }

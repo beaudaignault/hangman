@@ -1,35 +1,44 @@
 /*----- constants -----*/
+//# to-do: name function as verbs, name vars as nouns
+// well formatted code
+// remove dead code and use sensible comments
+// native or Jquery javaScript, not both
+// use simi-colons
 
 /*----- app's state (variables) -----*/
 var secret = [],
-  secretIdx = [],
   guess = [],
   wrongGuess = [],
-  numWrong = 0,
-  guessIdx, clickCount = 0
+  clickCount = 0
 
 /*----- cached element references -----*/
 var wordsArray = [
   "apple",
   "banana",
+  "girdle",
   "pear",
+  "bromide",
   "broom"
 ];
 
 function removeHangMan() {
-  if (guess.length === secret.length) {
-    wrongGuess.forEach(function (item, idx) {
-      console.log(item, idx)
-      $('b[data-item^="' + (idx) + '"]').attr({
-        'class': ''
-      });
+  // if (wrongGuess.length <=5) {
+  $('.b-parts b').each(function (idx) {
+    //console.log(item, idx)
+    $('b[data-item^="' + (idx) + '"]').attr({
+      'class': ''
     });
-  }
+  });
 }
+
 /*----- event listeners -----*/
+$('.try-again').on('click', function() {
+  getNextWord();
+})
 function renderHangMan() {
+  // if (wrongGuess < 6){
   wrongGuess.forEach(function (item, idx) {
-    console.log(item, idx)
+    console.log(item, idx + " from renderHangMan")
     $('b[data-item^="' + (idx) + '"]').attr({
       'class': 'reveal'
     });
@@ -38,33 +47,23 @@ function renderHangMan() {
 
 function handleClick(evt) {
   this.removeEventListener('click', handleClick)
-  if (!secret.includes(this.getAttribute('data-char').toString())) {
+  if (!secret.includes(this.getAttribute('data-char'))) {
     wrongGuess.push(this.getAttribute('data-char'));
   }
   renderHangMan();
- 
-  // *this* refers to the p tag that's been clicked, I think ;)
   guess.push(this.getAttribute('data-char'));
   // check char in guess against secret
-  if (guess !== null) { // don't really know what to do here
-    guess.forEach(function (item, idx) {
-      revealChar();
-    });
-  }
-  if (numWrong === 6) { // no idea what I've done here (below) <-
-    this.removeEventListener('click', handleClick)
-    numWrong++;
-    console.log(numWrong + ' num wrong')
+  guess.forEach(function (item, idx) {
+    revealChar();
+  });
+  if (wrongGuess.length === 6) {
+    console.log('hung')
     onLose();
-    numWrong++
-
-    inform('try again!');
   }
   onWin();
   renderButton();
-  removeHangMan();
-
 } // end HandelClick
+
 /*----- functions -----*/
 
 function renderButton() {
@@ -83,49 +82,32 @@ function renderButton() {
   });
 }
 
-// $(document).ready(function () {
 // choose random word from wordsArray, hold it in randomWord
-function randomFromArray() {
+function getRandomWord() {
   var random = Math.floor(Math.random() * wordsArray.length)
   var randomToString = wordsArray[random];
   console.log(randomToString);
   secret = randomToString.split("");
-  // console.log(secret + ' foo');
 }
-randomFromArray();
+getRandomWord();
 
-function nextWord() {
-  // RESET things 
-  wrongGuess = []
-  // renderHangMan();
-  resetKeys()
-  renderHangMan()
+function getNextWord() { // RESET 
+  wrongGuess = [];
+  guess = [];
   removeHangMan();
-  
-  // get rid of the underlines
+  hideStatus();
+  resetKeys();
+  renderHangMan();
   $('.secretword > ul').html("");
   // reset the hangman character
   // reset the touch keys
-  function resetKeys() {
-    var resetks = document.getElementsByTagName("p");
-    for (var i = 0, length = resetks.length; i < length; i++) {
-      $('p').attr({
-        'class': 'clear' //to-do: RESET doesn't clear this style. Sad :(
-      });
-    }
-  }
+  
+  getRandomWord();
+  onTouchKeys();
+} // end RESET
+document.getElementById('nextword').addEventListener('click', getNextWord);
 
-  // end RESET
-
-  // generate a new secret
-  randomFromArray();
-
-  // put underlines on the DOM for each letter in secret
-  manageHiddenWord();
-}
-document.getElementById('nextword').addEventListener('click', nextWord);
-
-function manageHiddenWord() {
+function onTouchKeys() {
   for (var i = 0; i < secret.length; i++) {
     $('.secretword > ul').append('<li class="conceal" data-idx="' + (this.secret[i]) + '"><b>' + (this.secret[i]) + '</b></li>');
   }
@@ -133,10 +115,10 @@ function manageHiddenWord() {
   for (var i = 0, length = touchKeys.length; i < length; i++) {
     var touchKey = touchKeys[i];
     touchKey.addEventListener('click', handleClick);
-  }; // for touchKey end
-  renderHangMan()
+  };
+  renderHangMan();
 }
-manageHiddenWord();
+onTouchKeys();
 
 function revealChar() {
   for (var i = 0; i < guess.length; i++) {
@@ -146,13 +128,33 @@ function revealChar() {
   }
 }
 
-// function onLose() {}
+function resetKeys() {
+  var resetks = document.getElementsByTagName("p");
+  for (var i = 0, length = resetks.length; i < length; i++) {
+    $('#keyboard p').attr({
+      'class': 'clear'
+    });
+  }; // simi-colon here? 
+}
 
-function inform(message) {
-  $("#dialog .dialog-msg").html(message);
-  $("#dialog").dialog("open");
-};
+function onLose() {
+informStatus();
+resetKeys();
+}
 
+function informStatus(checkWin) {
+  if (checkWin){
+    $('.dialog-msg').html("<h2>You Win!</h2>");
+    $('#dialog').show('fold', 1000);
+    console.log('win')
+  }else{
+    $('.dialog-msg').html("<h2>You've been hanged!</h2>");
+    $('#dialog').show('fold', 1000);
+  }
+}
+function hideStatus() {
+  $('#dialog').hide('fold', 1000);
+}
 function onWin() {
   var counter = 0;
   for (var i = 0; i < $('li').length; i++) {
@@ -162,6 +164,8 @@ function onWin() {
   }
   if (counter === secret.length) {
     console.log('end of game');
+    // informStatus = "foo end"
+    informStatus(true)
   }
 }
 
@@ -169,7 +173,6 @@ function onWin() {
 // if character is in randomWord, create innerHTML element containing the character
 //secret = words[ Math.floor(Math.random()*words.length)];
 //guess = // set to a string of same length as secret, but with placeholders //
-
 
 function render() {
   renderSecret();
@@ -180,4 +183,3 @@ function render() {
     renderTurn();
   }
 }
-// }); //end ready
