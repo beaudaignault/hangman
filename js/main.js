@@ -22,9 +22,7 @@ var wordsArray = [
 ];
 
 function removeHangMan() {
-  // if (wrongGuess.length <=5) {
   $('.b-parts b').each(function (idx) {
-    //console.log(item, idx)
     $('b[data-item^="' + (idx) + '"]').attr({
       'class': ''
     });
@@ -32,13 +30,12 @@ function removeHangMan() {
 }
 
 /*----- event listeners -----*/
-$('.try-again').on('click', function() {
+$('.try-again').on('click', function () {
   getNextWord();
 })
+
 function renderHangMan() {
-  // if (wrongGuess < 6){
   wrongGuess.forEach(function (item, idx) {
-    console.log(item, idx + " from renderHangMan")
     $('b[data-item^="' + (idx) + '"]').attr({
       'class': 'reveal'
     });
@@ -57,7 +54,6 @@ function handleClick(evt) {
     revealChar();
   });
   if (wrongGuess.length === 6) {
-    console.log('hung')
     onLose();
   }
   onWin();
@@ -86,7 +82,6 @@ function renderButton() {
 function getRandomWord() {
   var random = Math.floor(Math.random() * wordsArray.length)
   var randomToString = wordsArray[random];
-  console.log(randomToString);
   secret = randomToString.split("");
 }
 getRandomWord();
@@ -101,10 +96,11 @@ function getNextWord() { // RESET
   $('.secretword > ul').html("");
   // reset the hangman character
   // reset the touch keys
-  
+
   getRandomWord();
   onTouchKeys();
 } // end RESET
+
 document.getElementById('nextword').addEventListener('click', getNextWord);
 
 function onTouchKeys() {
@@ -132,29 +128,42 @@ function resetKeys() {
   var resetks = document.getElementsByTagName("p");
   for (var i = 0, length = resetks.length; i < length; i++) {
     $('#keyboard p').attr({
-      'class': 'clear'
+      'class': 'clear-away'
     });
   }; // simi-colon here? 
 }
 
 function onLose() {
-informStatus();
-resetKeys();
+  informStatus();
+  resetKeys();
+  revealSecret();
+}
+
+function revealSecret() {
+  // push all the letters of the secret into the guess array (one at a time)
+  secret.forEach(function (letter) {
+    guess.push(letter);
+  })
+
+  revealChar();
+
 }
 
 function informStatus(checkWin) {
-  if (checkWin){
-    $('.dialog-msg').html("<h2>You Win!</h2>");
+  if (checkWin) {
+    $('.dialog-msg').html('<h2>You Win!</h2>');
     $('#dialog').show('fold', 1000);
-    console.log('win')
-  }else{
+  } else {
     $('.dialog-msg').html("<h2>You've been hanged!</h2>");
     $('#dialog').show('fold', 1000);
+
   }
 }
+
 function hideStatus() {
   $('#dialog').hide('fold', 1000);
 }
+
 function onWin() {
   var counter = 0;
   for (var i = 0; i < $('li').length; i++) {
@@ -163,9 +172,7 @@ function onWin() {
     }
   }
   if (counter === secret.length) {
-    console.log('end of game');
-    // informStatus = "foo end"
-    informStatus(true)
+    informStatus(true);
   }
 }
 
@@ -173,13 +180,3 @@ function onWin() {
 // if character is in randomWord, create innerHTML element containing the character
 //secret = words[ Math.floor(Math.random()*words.length)];
 //guess = // set to a string of same length as secret, but with placeholders //
-
-function render() {
-  renderSecret();
-  renderGallows();
-  if (winner) {
-    renderWinner();
-  } else {
-    renderTurn();
-  }
-}

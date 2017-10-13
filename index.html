@@ -11,37 +11,34 @@
   <script src="jquery-ui/external/jquery/jquery.js"></script>
   <script src="jquery-ui/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Laila:600|Merienda+One|Yesteryear" rel="stylesheet">
 </head>
 <body>
   <div class="wrap">
 <h1>hang man</h1>
 <main class="parts">
- <!-- <canvas id="figure" width="620" height="520"></canvas> -->
  <div id="head" class="b-parts" value="completed : false">
-    
-    <b data-item="0" class="el">Q</b> 
-    
+    <b data-item="0" >Q</b> 
   </div>
   <div id="torso" class="b-parts" value="completed : false">
-    <b data-item="1" class="el">/</b> 
-    <b data-item="2" class="el">||</b> 
-    <b data-item="3" class="el">\</b> 
+    <b data-item="1" >/</b> 
+    <b data-item="2" >[]</b> 
+    <b data-item="3" >\</b> 
   </div>
   <div id="legs" class="b-parts" value="completed : false">
-    <b data-item="4" class="el">)</b> 
-    <b data-item="5" class="el">(</b> 
+    <b data-item="4" >)</b> 
+    <b data-item="5" >(</b> 
   </div>
+</main>
+<section>
   <aside id="dialog" class="hidden">
     <p class="dialog-msg"></p>
     <button class="try-again">Try again</button>
   </aside>
-</main>
-
-
+</section>
 <section class="secretword">
   <ul id="success-attempt"></ul>
 </section>
-
   <div id="keyboard" class="keyboard">
     <div class="kr1">
     <p data-char="q">q</p>
@@ -75,13 +72,11 @@
      <p data-char="n">n</p>
      <p data-char="m">m</p>
    </div>
- 
-  <footer>
-   
+  <footer> 
       <button id="nextword">Next Word</button>
   </footer>
 </div> 
-</div> <!-- wrap -->
+</div> <!-- /wrap -->
 <script src="js/main.js"></script>  
 </body>
 </html>
