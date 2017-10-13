@@ -9,3 +9,5 @@ Visit: <https://beaudaignault.github.io/hangman/>
 
 ### Hang Man's future 
 ...looks pretty grim ;) but, should he survive, perhaps a two-player version, or, word choice by topic option is in store.
+
+![screen shot](img/screenshot.jpg)
