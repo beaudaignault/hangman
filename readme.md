@@ -2,7 +2,7 @@
 One player game, based on the beloved classic death match.
 
 ## Technologies
-Made with care, using JavaScript, HTML, and CSS. Additional behaviors thanks to jQuery UI.
+Made with care, using JavaScript, HTML, and CSS. Additional behaviors thanks to jQuery UI. Hat-tip to Google font "Laila."
 
 ## To play
 Visit: <https://beaudaignault.github.io/hangman/>
