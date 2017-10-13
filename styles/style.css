@@ -42,9 +42,7 @@ main {
   font-size: 2em;
 }
 
-
 /* Secret word: */
-
 .secretword {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin-top: 1em;
