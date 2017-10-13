@@ -1,82 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hang Man</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
   <script src="jquery-ui/external/jquery/jquery.js"></script>
   <script src="jquery-ui/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="styles/style.css">
+  <script src="https://use.fontawesome.com/7c3a5076a8.js"></script>
+  <link rel="stylesheet" type="text/css" href="jssocials/jssocials.css" />
+  <link rel="stylesheet" type="text/css" href="jssocials/jssocials-theme-flat.css" />
   <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Laila:600|Merienda+One|Yesteryear" rel="stylesheet">
 </head>
+
 <body>
   <div class="wrap">
-<h1>hang man</h1>
-<main class="parts">
- <div id="head" class="b-parts" value="completed : false">
-    <b data-item="0" >Q</b> 
+    <h1>hang man</h1>
+    <main class="parts">
+      <div id="head" class="b-parts" value="completed : false">
+        <b data-item="0">Q</b>
+      </div>
+      <div id="torso" class="b-parts" value="completed : false">
+        <b data-item="1">/</b>
+        <b data-item="2">[]</b>
+        <b data-item="3">\</b>
+      </div>
+      <div id="legs" class="b-parts" value="completed : false">
+        <b data-item="4">)</b>
+        <b data-item="5">(</b>
+      </div>
+    </main>
+    <section>
+      <aside id="dialog" class="hidden">
+        <p class="dialog-msg"></p>
+        <button class="try-again">Play again</button>
+      </aside>
+    </section>
+    <section class="secretword">
+      <ul id="success-attempt"></ul>
+    </section>
+    <div id="keyboard" class="keyboard">
+      <div class="kr1">
+        <p data-char="q">q</p>
+        <p data-char="w">w</p>
+        <p data-char="e">e</p>
+        <p data-char="r">r</p>
+        <p data-char="t">t</p>
+        <p data-char="y">y</p>
+        <p data-char="u">u</p>
+        <p data-char="i">i</p>
+        <p data-char="o">o</p>
+        <p data-char="p">p</p>
+      </div>
+      <div class="kr2">
+        <p data-char="a">a</p>
+        <p data-char="s">s</p>
+        <p data-char="d">d</p>
+        <p data-char="f">f</p>
+        <p data-char="g">g</p>
+        <p data-char="h">h</p>
+        <p data-char="j">j</p>
+        <p data-char="k">k</p>
+        <p data-char="l">l</p>
+      </div>
+      <div class="kr3">
+        <p data-char="z">z</p>
+        <p data-char="x">x</p>
+        <p data-char="c">c</p>
+        <p data-char="v">v</p>
+        <p data-char="b">b</p>
+        <p data-char="n">n</p>
+        <p data-char="m">m</p>
+      </div>
+      <footer>
+        <button id="nextword">Next Word</button>
+        <div id="share"></div>
+      </footer>
+    </div>
   </div>
-  <div id="torso" class="b-parts" value="completed : false">
-    <b data-item="1" >/</b> 
-    <b data-item="2" >[]</b> 
-    <b data-item="3" >\</b> 
-  </div>
-  <div id="legs" class="b-parts" value="completed : false">
-    <b data-item="4" >)</b> 
-    <b data-item="5" >(</b> 
-  </div>
-</main>
-<section>
-  <aside id="dialog" class="hidden">
-    <p class="dialog-msg"></p>
-    <button class="try-again">Play again</button>
-  </aside>
-</section>
-<section class="secretword">
-  <ul id="success-attempt"></ul>
-</section>
-  <div id="keyboard" class="keyboard">
-    <div class="kr1">
-    <p data-char="q">q</p>
-    <p data-char="w">w</p>
-    <p data-char="e">e</p>    
-    <p data-char="r">r</p>
-    <p data-char="t">t</p>
-    <p data-char="y">y</p>
-    <p data-char="u">u</p>
-    <p data-char="i">i</p>
-    <p data-char="o">o</p>
-    <p data-char="p">p</p>
-   </div>
-   <div class="kr2">
-     <p data-char="a">a</p>
-     <p data-char="s">s</p>
-     <p data-char="d">d</p>
-     <p data-char="f">f</p>
-     <p data-char="g">g</p>
-     <p data-char="h">h</p>
-     <p data-char="j">j</p>
-     <p data-char="k">k</p>
-     <p data-char="l">l</p>
-   </div>
-   <div class="kr3">
-     <p data-char="z">z</p>
-     <p data-char="x">x</p>
-     <p data-char="c">c</p>
-     <p data-char="v">v</p>
-     <p data-char="b">b</p>
-     <p data-char="n">n</p>
-     <p data-char="m">m</p>
-   </div>
-  <footer> 
-      <button id="nextword">Next Word</button>
-  </footer>
-</div> 
-</div> <!-- /wrap -->
-<script src="js/main.js"></script>  
+  <!-- /wrap -->
+  <script src="js/main.js"></script>
+  <script src="jssocials/jssocials.min.js"></script>
+  <script>
+    $("#share").jsSocials({
+      shares: ["twitter", "facebook"],
+      url: "https://beaudaignault.github.io/hangman/",
+      text: "Come hang out with my Hang Man game!"
+    });
+  </script>
 </body>
+
 </html>

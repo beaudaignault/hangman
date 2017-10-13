@@ -47,7 +47,8 @@ function handleClick(evt) {
     onWin();
   }
   renderButtons();
-} // end HandelClick
+} 
+// end HandelClick
 
 document.getElementById('nextword').addEventListener('click', getNextWord);
 
@@ -163,3 +164,4 @@ function onWin() {
     informStatus(true);
   }
 }
+
